@@ -3,10 +3,54 @@ import React, { Component } from 'react'
 export default class Content extends Component {
     constructor(props) {
         super(props);        
+        this.state = {
+            trangthai: 0
+        }
+        this.trichdan = this.props.trichdan;
     }
     
-    thongbao = () => {
-        alert ('Cach xu ly tuong tac');
+    editOnClick = () => {
+        this.setState({
+            trangthai:1            
+        });
+    }
+
+    saveOnClick = () => {
+        this.setState({
+            trangthai:0
+        })
+        this.trichdan = this.trunggian.value;
+    }
+
+    renderButton = () => {
+        return (
+            <div className="row">
+            <div class="btn btn-group">
+                <div class="btn btn-info" onClick={this.editOnClick}>Edit</div>
+                <div class="btn btn-warning">Delete</div>
+            </div>                                    
+        </div>
+        )
+    }
+
+    renderForm = () => {
+        return (
+            <div className="row">
+                <div className="form-group">
+                    <input defaultValue={this.trichdan} type="text" name="txtTrichDan" className="form-control"  
+                        ref = {(dulieunhap) => {this.trunggian = dulieunhap}} />
+                    <div className="btn btn-block btn-danger" onClick={this.saveOnClick}>Save</div>
+                </div>
+            </div>
+        )
+    }
+
+    showItem = () => {
+        if (this.state.trangthai === 0) {
+            return this.renderButton();
+        } else if (this.state.trangthai === 1) {
+            return this.renderForm();
+        }
     }
 
     render() {
@@ -22,19 +66,16 @@ export default class Content extends Component {
                             <div className={"col-lg-7 " + this.props.vitri2}>
                                 <div className="p-1">
                                     <h2 className="display-4">{this.props.tieude}</h2>
-                                    <p>{this.props.trichdan}</p>
+                                    <p>{this.trichdan}</p>
                                 </div>
-                                <div className="row">
-                                    <div class="btn btn-group">
-                                        <div class="btn btn-info" onClick={this.thongbao}>Edit</div>
-                                        <div class="btn btn-warning">Delete</div>
-                                    </div>                                    
-                                </div>
+                               <hr/>
 
-                                <hr/>
+                                {this.showItem()}
                             </div>
                         </div>
-                    </div>                       
+                    </div>     
+                    
+                   
         );
     }
 }
