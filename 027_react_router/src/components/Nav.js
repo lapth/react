@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {
-  Link
+  Link,
+  NavLink
 } from 'react-router-dom';
 
 class Nav extends Component {
@@ -12,10 +13,10 @@ class Nav extends Component {
             <div className="collapse navbar-collapse" id="navbarResponsive">
               <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
-                  <Link to="/tintuc">Tin Tuc</Link>
+                  <NavLink to="/tintuc">Tin Tuc</NavLink>
                 </li>                
                 <li className="nav-item">
-                  <Link to="/lienhe">Lien He</Link>
+                  <NavLink to="/lienhe">Lien He</NavLink>
                 </li>
               </ul>
             </div>

@@ -31,3 +31,8 @@ ul.navbar-nav.ml-auto li a {
   display: block;
   padding: 12px;
 }
+
+#mainNav .navbar-nav>li>a.active {
+  color: #fdcc52;
+  background: black;
+}

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import '../css/App.css';
+import './../css/index.css';
+import './../css/App.css';
+
 import Dieuhuong from '../router/Dieuhuong';
 import {
   BrowserRouter as Router,
