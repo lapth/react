@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import data from './newsdata.json';
+import Mautin from './Mautin';
 
 class Tintuc extends Component {
   render() {
@@ -6,66 +8,11 @@ class Tintuc extends Component {
       <div>
         <div className="container">
           <div className="row mt-3">
-            <div className="col-4">
-              <div className="card-desk">
-                <div className="card">
-                  <img src="http://placehold.it/800x400" alt className="img-fluid" />
-                  <blockquote className="blockquote">
-                    <p>holo halo hello bonjourholo halo hello bonjourholo halo hello bonjourholo halo hello
-                    bonjourholo halo hello bonjourholo halo hello bonjourholo halo hello bonjourholo halo hello bonjour</p>
-                    <footer className="card-blockquote">Footer<cite title="Source title">Source title</cite></footer>
-                  </blockquote>
-                </div>
-              </div>
-            </div>
-            <div className="col-4">
-              <div className="card-desk">
-                <div className="card">
-                  <img src="http://placehold.it/800x400" alt className="img-fluid" />
-                  <blockquote className="blockquote">
-                    <p>holo halo hello bonjourholo halo hello bonjourholo halo hello bonjourholo halo hello
-                    bonjourholo halo hello bonjourholo halo hello bonjourholo halo hello bonjourholo halo hello bonjour</p>
-                    <footer className="card-blockquote">Footer<cite title="Source title">Source title</cite></footer>
-                  </blockquote>
-                </div>
-              </div>
-            </div>
-            <div className="col-4">
-              <div className="card-desk">
-                <div className="card">
-                  <img src="http://placehold.it/800x400" alt className="img-fluid" />
-                  <blockquote className="blockquote">
-                    <p>holo halo hello bonjourholo halo hello bonjourholo halo hello bonjourholo halo hello
-                    bonjourholo halo hello bonjourholo halo hello bonjourholo halo hello bonjourholo halo hello bonjour</p>
-                    <footer className="card-blockquote">Footer<cite title="Source title">Source title</cite></footer>
-                  </blockquote>
-                </div>
-              </div>
-            </div>
-            <div className="col-4">
-              <div className="card-desk">
-                <div className="card">
-                  <img src="http://placehold.it/800x400" alt className="img-fluid" />
-                  <blockquote className="blockquote">
-                    <p>holo halo hello bonjourholo halo hello bonjourholo halo hello bonjourholo halo hello
-                    bonjourholo halo hello bonjourholo halo hello bonjourholo halo hello bonjourholo halo hello bonjour</p>
-                    <footer className="card-blockquote">Footer<cite title="Source title">Source title</cite></footer>
-                  </blockquote>
-                </div>
-              </div>
-            </div>
-            <div className="col-4">
-              <div className="card-desk">
-                <div className="card">
-                  <img src="http://placehold.it/800x400" alt className="img-fluid" />
-                  <blockquote className="blockquote">
-                    <p>holo halo hello bonjourholo halo hello bonjourholo halo hello bonjourholo halo hello
-                    bonjourholo halo hello bonjourholo halo hello bonjourholo halo hello bonjourholo halo hello bonjour</p>
-                    <footer className="card-blockquote">Footer<cite title="Source title">Source title</cite></footer>
-                  </blockquote>
-                </div>
-              </div>
-            </div>
+            {
+              data.map((value, key) => (
+                <Mautin key={key} tinid={value.id} anh={value.anh} tieude={value.tieude} />
+               ))
+            }
           </div>
         </div>
       </div>

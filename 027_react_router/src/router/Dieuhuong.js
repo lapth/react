@@ -8,6 +8,7 @@ import {
 import Home from '../components/Home';
 import Lienhe from '../components/Lienhe';
 import Tintuc from '../components/Tintuc';
+import Tinchitiet from '../components/Tinchitiet';
 
 
 class Dieuhuong extends Component {
@@ -18,6 +19,7 @@ class Dieuhuong extends Component {
                     <Route exact path="/" component={Home} />
                     <Route path="/lienhe" component={Lienhe} />
                     <Route path="/tintuc" component={Tintuc} />
+                    <Route path="/tinchitiet" component={Tinchitiet} />
                 </div>
           
         );
