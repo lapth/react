@@ -19,7 +19,7 @@ class Dieuhuong extends Component {
                     <Route exact path="/" component={Home} />
                     <Route path="/lienhe" component={Lienhe} />
                     <Route path="/tintuc" component={Tintuc} />
-                    <Route path="/tinchitiet" component={Tinchitiet} />
+                    <Route path="/tinchitiet/:slug.:id.html" component={Tinchitiet} />
                 </div>
           
         );

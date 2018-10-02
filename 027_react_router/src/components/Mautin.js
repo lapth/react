@@ -35,7 +35,7 @@ class Mautin extends Component {
             <div className="col-4">
                 <div className="card-desk">
                     <div className="card">
-                        <a href={"/tinchitiet/" + this.to_slug(this.props.tieude) + "-" + this.props.tinid + ".html"}>
+                        <a href={"/tinchitiet/" + this.to_slug(this.props.tieude) + "." + this.props.tinid + ".html"}>
                             <img src={this.props.anh} alt className="img-fluid" /> </a>
                         <blockquote className="blockquote">
                             <p>{this.props.tieude}</p>
