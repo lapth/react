@@ -3,27 +3,10 @@ import React, { Component } from 'react';
 class AddUser extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            trangThaiSua: true
-        }
-    }
-    
-    thayDoiTrangThai = () => {
-        this.setState({
-            trangThaiSua: !this.state.trangThaiSua
-        })
-    }
-
-    hienThiSua = () => {
-        if (this.state.trangThaiSua === true) {
-            return <div className="btn btn-outline-primary btn-block" onClick={() => this.thayDoiTrangThai()}>Thêm Mới</div>
-        } else {
-            return <div className="btn btn-outline-secondary btn-block" onClick={() => this.thayDoiTrangThai()}>Đóng</div>
-        }
     }
 
     hienThiForm = () => {
-        if (this.state.trangThaiSua != true) {
+        if (this.props.trangThaiSua != true) {
             return (
                 <div className="card border-primary mb-3 mt-3">
                     <div className="card-header">Thêm Mới User</div>
@@ -49,17 +32,16 @@ class AddUser extends Component {
                     </div>
                 </div>
             )
+        } else {
+            return (
+                <div></div>
+            )
         }
     }
 
     render() {
         return (
-            <div className="col-3">
-                <div className="">
-                    {this.hienThiSua()}
-                    {this.hienThiForm()}
-                </div>
-            </div>
+            this.hienThiForm()
         );
     }
 }
