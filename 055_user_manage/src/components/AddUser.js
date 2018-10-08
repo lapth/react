@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
 
 class AddUser extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     hienThiForm = () => {
-        if (this.props.trangThaiSua != true) {
+        if (this.props.trangThaiSua !== true) {
             return (
                 <div className="card border-primary mb-3 mt-3">
                     <div className="card-header">Thêm Mới User</div>

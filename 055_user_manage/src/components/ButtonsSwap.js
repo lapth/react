@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 
 class ButtonsSwap extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     hienThiSua = () => {
         if (this.props.trangThaiSua === true) {
             return <div className="btn btn-outline-primary btn-block" 

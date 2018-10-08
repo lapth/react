@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import TableRow from './TableRow';
 
 class Tabledata extends Component {
     render() {
@@ -15,66 +16,11 @@ class Tabledata extends Component {
                         </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Trần Văn A</td>
-                                <td>0123456789</td>
-                                <td>Administrator</td>
-                                <td>
-                                    <div className="btn-group">
-                                        <div className="btn btn-warning"><i className="fa fa-edit"/> Sửa</div>
-                                        <div className="btn btn-danger"><i className="fa fa-trash"/> Xóa</div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Trần Văn A</td>
-                                <td>0123456789</td>
-                                <td>Administrator</td>
-                                <td>
-                                    <div className="btn-group">
-                                        <div className="btn btn-warning"><i className="fa fa-edit"/> Sửa</div>
-                                        <div className="btn btn-danger"><i className="fa fa-trash"/> Xóa</div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td >3</td>
-                                <td>Trần Văn A</td>
-                                <td>0123456789</td>
-                                <td>Administrator</td>
-                                <td>
-                                    <div className="btn-group">
-                                        <div className="btn btn-warning"><i className="fa fa-edit"/> Sửa</div>
-                                        <div className="btn btn-danger"><i className="fa fa-trash"/> Xóa</div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>Trần Văn A</td>
-                                <td>0123456789</td>
-                                <td>Administrator</td>
-                                <td>
-                                    <div className="btn-group">
-                                        <div className="btn btn-warning"><i className="fa fa-edit"/> Sửa</div>
-                                        <div className="btn btn-danger"><i className="fa fa-trash"/> Xóa</div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>Trần Văn A</td>
-                                <td>0123456789</td>
-                                <td>Administrator</td>
-                                <td>
-                                    <div className="btn-group">
-                                        <div className="btn btn-warning"><i className="fa fa-edit"/> Sửa</div>
-                                        <div className="btn btn-danger"><i className="fa fa-trash"/> Xóa</div>
-                                    </div>
-                                </td>
-                            </tr>
+                            {
+                                this.props.data.map((value, key) => {
+                                    return <TableRow rowData={value} key={key}/>
+                                })
+                            }
                         </tbody>
                 </table>
             </div>
