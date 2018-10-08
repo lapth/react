@@ -1,0 +1,38 @@
+[
+    {
+        "id":1,
+        "hoTen": "Nguyen Van A",
+        "tel": "0123456789",
+        "quyen": "Admin"
+    },
+    {
+        "id":2,
+        "hoTen": "Nguyen Van B",
+        "tel": "0123456789",
+        "quyen": "Normal"
+    },
+    {
+        "id":3,
+        "hoTen": "Nguyen Van C",
+        "tel": "0123456789",
+        "quyen": "Mondarator"
+    },
+    {
+        "id":4,
+        "hoTen": "Nguyen Van A",
+        "tel": "0123456789",
+        "quyen": "Admin"
+    },
+    {
+        "id":5,
+        "hoTen": "Nguyen Van B",
+        "tel": "0123456789",
+        "quyen": "Normal"
+    },
+    {
+        "id":6,
+        "hoTen": "Nguyen Van C",
+        "tel": "0123456789",
+        "quyen": "Mondarator"
+    }
+]
