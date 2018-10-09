@@ -25,25 +25,22 @@ class App extends Component {
     })
   }
 
-  filterTableData = (giaTriCanTim) => {
-    this.setState({
-      resultFilter: giaTriCanTim
-    });
+  filterTableData = (giaTriCanTim) => {        
     var filteredArr = [];
     this.state.data.forEach(element => {
       if (element.hoTen.indexOf(giaTriCanTim) !== -1) {
         filteredArr.push(element);
       }
     });
-    this.setState({tmpData: filteredArr});
+    this.setState({
+      tmpData: filteredArr,
+      resultFilter: giaTriCanTim
+    });
   }
 
   addNewUser = (newUser) => {
-    var userData = this.state.data;
-    userData.push(newUser);
-    this.setState({
-      data: userData
-    });
+    this.state.data.push(newUser);
+    
     this.filterTableData(this.state.resultFilter);
   }
 
@@ -58,7 +55,13 @@ class App extends Component {
   }
 
   onBtnDeleteClick = (userId) => {
-    var userData = this.state.data.filter(item => item.id !== userId);
+    console.log(this.state.data);
+    var userData = [];
+    this.state.data.forEach((item) => {
+      if (item.id !== userId) {
+        userData.push(item);
+      }
+    });
     this.setState({
       data: userData
     });
