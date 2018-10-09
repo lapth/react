@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import TableRow from './TableRow';
 
 class Tabledata extends Component {
+
     render() {
         return (
             <div className="col-9">
@@ -13,69 +15,20 @@ class Tabledata extends Component {
                             <th>Quyền Hạn</th>
                             <th>Thao Tác</th>
                         </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Trần Văn A</td>
-                                <td>0123456789</td>
-                                <td>Administrator</td>
-                                <td>
-                                    <div className="btn-group">
-                                        <div className="btn btn-warning"><i className="fa fa-edit"/> Sửa</div>
-                                        <div className="btn btn-danger"><i className="fa fa-trash"/> Xóa</div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Trần Văn A</td>
-                                <td>0123456789</td>
-                                <td>Administrator</td>
-                                <td>
-                                    <div className="btn-group">
-                                        <div className="btn btn-warning"><i className="fa fa-edit"/> Sửa</div>
-                                        <div className="btn btn-danger"><i className="fa fa-trash"/> Xóa</div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td >3</td>
-                                <td>Trần Văn A</td>
-                                <td>0123456789</td>
-                                <td>Administrator</td>
-                                <td>
-                                    <div className="btn-group">
-                                        <div className="btn btn-warning"><i className="fa fa-edit"/> Sửa</div>
-                                        <div className="btn btn-danger"><i className="fa fa-trash"/> Xóa</div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>Trần Văn A</td>
-                                <td>0123456789</td>
-                                <td>Administrator</td>
-                                <td>
-                                    <div className="btn-group">
-                                        <div className="btn btn-warning"><i className="fa fa-edit"/> Sửa</div>
-                                        <div className="btn btn-danger"><i className="fa fa-trash"/> Xóa</div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>Trần Văn A</td>
-                                <td>0123456789</td>
-                                <td>Administrator</td>
-                                <td>
-                                    <div className="btn-group">
-                                        <div className="btn btn-warning"><i className="fa fa-edit"/> Sửa</div>
-                                        <div className="btn btn-danger"><i className="fa fa-trash"/> Xóa</div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
+                    </thead>
+                    <tbody>
+                        {
+                            this.props.data.map((value, key) => {
+                                return <TableRow 
+                                            rowData={value} 
+                                            stt={key} 
+                                            key={key} 
+                                            quyens={this.props.quyens}
+                                            onBtnEditClick = {this.props.onBtnEditClick}
+                                            onBtnDeleteClick = {this.props.onBtnDeleteClick}/>
+                            })
+                        }
+                    </tbody>
                 </table>
             </div>
         );
