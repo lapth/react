@@ -48,10 +48,19 @@ class App extends Component {
   }
 
   onBtnEditClick = (user) => {
-    this.state.data.forEach((item, index, arr) => {
+    this.state.data.some((item, index, arr) => {
       if (item.id === user.id) {
         arr[index] = JSON.parse(JSON.stringify(user));
+        return true;
       }
+    });
+    this.filterTableData(this.state.resultFilter);
+  }
+
+  onBtnDeleteClick = (userId) => {
+    var userData = this.state.data.filter(item => item.id !== userId);
+    this.setState({
+      data: userData
     });
     this.filterTableData(this.state.resultFilter);
   }
@@ -64,7 +73,10 @@ class App extends Component {
           <div className="container">
             <div className="row">
               <Search returnGiaTriTim={this.filterTableData} />
-              <Tabledata data={this.state.tmpData} quyens={quyens} onBtnEditClick={this.onBtnEditClick} />
+              <Tabledata 
+                  data = {this.state.tmpData} quyens={quyens} 
+                  onBtnEditClick = {this.onBtnEditClick} 
+                  onBtnDeleteClick = {this.onBtnDeleteClick}/>
               <div className="col-3">
                 <ButtonsSwap trangThaiSua={this.state.trangThaiSua} thayDoiTrangThai={this.thayDoiTrangThai} />
                 <AddUser trangThaiSua={this.state.trangThaiSua} quyens={quyens} addNewUser={this.addNewUser} />

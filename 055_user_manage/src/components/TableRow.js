@@ -10,7 +10,7 @@ class TableRow extends Component {
             quyen: this.props.rowData.quyen
         };
     }
-    
+
     swapFormMode = () => {
         this.setState({
             editMode: !this.state.editMode
@@ -32,7 +32,7 @@ class TableRow extends Component {
         modifiedUser.hoTen = this.state.hoTen;
         modifiedUser.tel = this.state.tel;
         modifiedUser.quyen = this.state.quyen;
-        
+
         this.props.onBtnEditClick(modifiedUser);
     }
 
@@ -46,8 +46,9 @@ class TableRow extends Component {
                     <td>{this.props.quyens[this.props.rowData.quyen]}</td>
                     <td>
                         <div className="btn-group">
-                            <div className="btn btn-warning" onClick={() => this.swapFormMode()}><i className="fa fa-edit"/> Sửa</div>
-                            <div className="btn btn-danger"><i className="fa fa-trash" /> Xóa</div>
+                            <div className="btn btn-warning" onClick={() => this.swapFormMode()}><i className="fa fa-edit" /> Sửa</div>
+                            <div className="btn btn-danger" onClick={() => this.props.onBtnDeleteClick(this.props.rowData.id)}>
+                                <i className="fa fa-trash" /> Xóa</div>
                         </div>
                     </td>
                 </tr>
@@ -59,19 +60,19 @@ class TableRow extends Component {
                     <td>
                         <div className="form-group">
                             <input type="text" defaultValue={this.props.rowData.hoTen} name="hoTen"
-                            onChange={(event) => this.onFieldChanged(event)}/>
+                                onChange={(event) => this.onFieldChanged(event)} />
                         </div>
                     </td>
                     <td>
                         <div className="form-group">
                             <input type="text" defaultValue={this.props.rowData.tel} name="tel"
-                                onChange={(event) => this.onFieldChanged(event)}/>
+                                onChange={(event) => this.onFieldChanged(event)} />
                         </div>
                     </td>
                     <td>
                         <div className="form-group">
                             <select name="quyen" className="custom-select" required
-                                defaultValue = {this.props.rowData.quyen}
+                                defaultValue={this.props.rowData.quyen}
                                 onChange={(event) => this.onFieldChanged(event)}>
                                 {
                                     this.props.quyens.map((item, key) => {
@@ -85,7 +86,7 @@ class TableRow extends Component {
                     </td>
                     <td>
                         <div className="btn-group">
-                            <div className="btn btn-warning" onClick={() => this.onEditDone()}><i className="fa fa-check"/> Done</div>                            
+                            <div className="btn btn-warning" onClick={() => this.onEditDone()}><i className="fa fa-check" /> Done</div>
                         </div>
                     </td>
                 </tr>
