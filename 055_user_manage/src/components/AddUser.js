@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+const uuidv1 = require('uuid/v1');
 
 class AddUser extends Component {
     constructor(props) {
@@ -23,7 +24,7 @@ class AddUser extends Component {
 
     onBtnAddUserClick = () => {
         var newUser = {
-            "id": 7,
+            "id": uuidv1(),
             "hoTen": this.state.hoTen,
             "tel": this.state.tel,
             "quyen": this.state.quyen

@@ -4,7 +4,7 @@ class TableRow extends Component {
     render() {
         return (
             <tr>
-                <td>{this.props.rowData.id}</td>
+                <td>{this.props.stt + 1}</td>
                 <td>{this.props.rowData.hoTen}</td>
                 <td>{this.props.rowData.tel}</td>
                 <td>{this.props.quyens[this.props.rowData.quyen]}</td>
