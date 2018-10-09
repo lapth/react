@@ -6,6 +6,7 @@ import Tabledata from './Tabledata';
 import AddUser from './AddUser';
 import ButtonsSwap from './ButtonsSwap';
 import fileDuLieu from './data.json';
+import quyens from './quyens.json';
 
 class App extends Component {
   constructor(props) {
@@ -23,7 +24,7 @@ class App extends Component {
     })
   }
 
-  returnGiaTriTim = (giaTriCanTim) => {
+  filterTableData = (giaTriCanTim) => {
     var filteredArr = [];
     this.state.data.forEach(element => {
       if (element.hoTen.indexOf(giaTriCanTim) !== -1) {
@@ -33,6 +34,15 @@ class App extends Component {
     this.setState({tmpData: filteredArr});
   }
 
+  addNewUser = (newUser) => {
+    var userData = this.state.data;
+    userData.push(newUser);
+    this.setState({
+      data: userData
+    });
+    this.filterTableData('');
+  }
+
   render() {
     return (
       <div>
@@ -40,11 +50,11 @@ class App extends Component {
         <div className="searchForm">
           <div className="container">
             <div className="row">
-              <Search returnGiaTriTim={this.returnGiaTriTim} />
-              <Tabledata data={this.state.tmpData} />
+              <Search returnGiaTriTim={this.filterTableData} />
+              <Tabledata data={this.state.tmpData} quyens={quyens} />
               <div className="col-3">
-                <ButtonsSwap trangThaiSua={this.state.trangThaiSua} thayDoiTrangThai={() => this.thayDoiTrangThai()} />
-                <AddUser trangThaiSua={this.state.trangThaiSua} />
+                <ButtonsSwap trangThaiSua={this.state.trangThaiSua} thayDoiTrangThai={this.thayDoiTrangThai} />
+                <AddUser trangThaiSua={this.state.trangThaiSua} quyens={quyens} addNewUser={this.addNewUser} />
               </div>
             </div>
           </div>

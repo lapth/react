@@ -18,7 +18,7 @@ class Tabledata extends Component {
                         <tbody>
                             {
                                 this.props.data.map((value, key) => {
-                                    return <TableRow rowData={value} key={key}/>
+                                    return <TableRow rowData={value} key={key} quyens={this.props.quyens}/>
                                 })
                             }
                         </tbody>
