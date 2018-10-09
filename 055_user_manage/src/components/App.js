@@ -13,12 +13,33 @@ class App extends Component {
     super(props);
     this.state = {
       trangThaiSua: false,
-      data: fileDuLieu,
-      tmpData:fileDuLieu.slice(0),
+      data: [],
+      tmpData:[],
       resultFilter: ''
     }
   }
 
+  saveToLocalStorage = (basedData = this.state.data) => {
+    localStorage.setItem('UserData', JSON.stringify(basedData));
+  }
+
+  componentWillMount() {
+    var localData = localStorage.getItem('UserData');
+    if (localData === null) {
+      this.saveToLocalStorage(fileDuLieu);
+      this.setState({
+        data: fileDuLieu,
+        tmpData: fileDuLieu
+      }); 
+    } else {
+      var storedData = JSON.parse(localData);
+      this.setState({
+        data: storedData,
+        tmpData: storedData
+      });
+    }
+  }
+  
   thayDoiTrangThai = () => {
     this.setState({
       trangThaiSua: !this.state.trangThaiSua
@@ -48,6 +69,7 @@ class App extends Component {
     this.setState({
       tmpData: this.getFilteredData(this.state.resultFilter)
     });
+    this.saveToLocalStorage();
   }
 
   onBtnEditClick = (user) => {
@@ -60,6 +82,7 @@ class App extends Component {
     this.setState({
       tmpData: this.getFilteredData(this.state.resultFilter)
     });
+    this.saveToLocalStorage();
   }
 
   onBtnDeleteClick = (userId) => {
@@ -70,6 +93,7 @@ class App extends Component {
     this.setState({
       tmpData: this.getFilteredData(this.state.resultFilter, userData)
     });
+    this.saveToLocalStorage(userData);
   }
 
   render() {
