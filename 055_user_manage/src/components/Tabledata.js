@@ -15,20 +15,20 @@ class Tabledata extends Component {
                             <th>Quyền Hạn</th>
                             <th>Thao Tác</th>
                         </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                this.props.data.map((value, key) => {
-                                    return <TableRow 
-                                                rowData={value} 
-                                                stt={key} 
-                                                key={key} 
-                                                quyens={this.props.quyens}
-                                                onBtnEditClick = {this.props.onBtnEditClick}
-                                                onBtnDeleteClick = {this.props.onBtnDeleteClick}/>
-                                })
-                            }
-                        </tbody>
+                    </thead>
+                    <tbody>
+                        {
+                            this.props.data.map((value, key) => {
+                                return <TableRow 
+                                            rowData={value} 
+                                            stt={key} 
+                                            key={key} 
+                                            quyens={this.props.quyens}
+                                            onBtnEditClick = {this.props.onBtnEditClick}
+                                            onBtnDeleteClick = {this.props.onBtnDeleteClick}/>
+                            })
+                        }
+                    </tbody>
                 </table>
             </div>
         );

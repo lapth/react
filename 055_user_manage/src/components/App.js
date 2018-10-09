@@ -25,23 +25,29 @@ class App extends Component {
     })
   }
 
-  filterTableData = (giaTriCanTim) => {        
+  getFilteredData = (filterValue, basedData = this.state.data) => {
     var filteredArr = [];
-    this.state.data.forEach(element => {
-      if (element.hoTen.indexOf(giaTriCanTim) !== -1) {
+    basedData.forEach(element => {
+      if (element.hoTen.indexOf(filterValue) !== -1) {
         filteredArr.push(element);
       }
     });
+
+    return filteredArr;
+  }
+
+  filterTableData = (giaTriCanTim) => {
     this.setState({
-      tmpData: filteredArr,
+      tmpData: this.getFilteredData(giaTriCanTim),
       resultFilter: giaTriCanTim
     });
   }
 
   addNewUser = (newUser) => {
     this.state.data.push(newUser);
-    
-    this.filterTableData(this.state.resultFilter);
+    this.setState({
+      tmpData: this.getFilteredData(this.state.resultFilter)
+    });
   }
 
   onBtnEditClick = (user) => {
@@ -51,21 +57,19 @@ class App extends Component {
         return true;
       }
     });
-    this.filterTableData(this.state.resultFilter);
+    this.setState({
+      tmpData: this.getFilteredData(this.state.resultFilter)
+    });
   }
 
   onBtnDeleteClick = (userId) => {
-    console.log(this.state.data);
-    var userData = [];
-    this.state.data.forEach((item) => {
-      if (item.id !== userId) {
-        userData.push(item);
-      }
+    var userData =  this.state.data.filter(item => item.id !== userId);
+    this.setState({
+      data: userData,
     });
     this.setState({
-      data: userData
+      tmpData: this.getFilteredData(this.state.resultFilter, userData)
     });
-    this.filterTableData(this.state.resultFilter);
   }
 
   render() {
