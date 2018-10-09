@@ -50,7 +50,7 @@ class App extends Component {
   onBtnEditClick = (user) => {
     this.state.data.forEach((item, index, arr) => {
       if (item.id === user.id) {
-        arr[index] = JSON.parse(JSON.stringify(user));;
+        arr[index] = JSON.parse(JSON.stringify(user));
       }
     });
     this.filterTableData(this.state.resultFilter);
