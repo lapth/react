@@ -14,7 +14,8 @@ class App extends Component {
     this.state = {
       trangThaiSua: false,
       data: fileDuLieu,
-      tmpData:fileDuLieu.slice(0)
+      tmpData:fileDuLieu.slice(0),
+      resultFilter: ''
     }
   }
 
@@ -25,6 +26,9 @@ class App extends Component {
   }
 
   filterTableData = (giaTriCanTim) => {
+    this.setState({
+      resultFilter: giaTriCanTim
+    });
     var filteredArr = [];
     this.state.data.forEach(element => {
       if (element.hoTen.indexOf(giaTriCanTim) !== -1) {
@@ -40,7 +44,16 @@ class App extends Component {
     this.setState({
       data: userData
     });
-    this.filterTableData('');
+    this.filterTableData(this.state.resultFilter);
+  }
+
+  onBtnEditClick = (user) => {
+    this.state.data.forEach((item, index, arr) => {
+      if (item.id === user.id) {
+        arr[index] = JSON.parse(JSON.stringify(user));;
+      }
+    });
+    this.filterTableData(this.state.resultFilter);
   }
 
   render() {
@@ -51,7 +64,7 @@ class App extends Component {
           <div className="container">
             <div className="row">
               <Search returnGiaTriTim={this.filterTableData} />
-              <Tabledata data={this.state.tmpData} quyens={quyens} />
+              <Tabledata data={this.state.tmpData} quyens={quyens} onBtnEditClick={this.onBtnEditClick} />
               <div className="col-3">
                 <ButtonsSwap trangThaiSua={this.state.trangThaiSua} thayDoiTrangThai={this.thayDoiTrangThai} />
                 <AddUser trangThaiSua={this.state.trangThaiSua} quyens={quyens} addNewUser={this.addNewUser} />

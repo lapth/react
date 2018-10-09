@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import TableRow from './TableRow';
 
 class Tabledata extends Component {
+
     render() {
         return (
             <div className="col-9">
@@ -18,7 +19,12 @@ class Tabledata extends Component {
                         <tbody>
                             {
                                 this.props.data.map((value, key) => {
-                                    return <TableRow rowData={value} stt={key} key={key} quyens={this.props.quyens}/>
+                                    return <TableRow 
+                                                rowData={value} 
+                                                stt={key} 
+                                                key={key} 
+                                                quyens={this.props.quyens}
+                                                onBtnEditClick = {this.props.onBtnEditClick}/>
                                 })
                             }
                         </tbody>
