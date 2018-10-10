@@ -53,14 +53,14 @@
 126 - Ket noi store
 127 - Truyen tham so len store
 128 - Push du lieu len firebase
-129
-130
-131
-132
-133
-134
-135
-136
+129 - Lay du lieu tu firebase va set vao state thong qua ham ON
+130 - Do du lieu ra form
+131 - Ket noi state voi App
+132 - Ket noi xuong NoteList - Click Edit
+133 - Edit noi dung can sua
+134 - Nhan item can sua
+135 - Day du lieu len form
+136 - Load item ve (co id)
 137
 138
 139
