@@ -17,6 +17,63 @@ class App extends Component {
       tmpData:[],
       resultFilter: ''
     }
+    this.testRedux();
+  }
+
+  // testOperator = () => {
+  //   console.log("============ Clone Object ==============");
+  //   var o1 = [1,2,3,4,5];
+  //   console.log("Original object 1: " + o1);
+  //   var o2 = [...o1];
+  //   o1[0]=100;
+  //   console.log("Changed object 1: " + o1);
+  //   console.log("Cloned Object 2: " + o2);
+
+  //   console.log("============ Copy and add more value ==============");
+  //   var o1 = [1,2,3,4,5];
+  //   console.log("Original object 1: " + o1);
+  //   var o2 = [...o1, 111];    
+  //   console.log("Cloned Object 2: " + o2);
+
+  //   console.log("============ Copy and change value ==============");
+  //   var o1 = {
+  //     arr: [1,2,3,4,5],
+  //     otherAtt: "hello world"
+  //   }
+  //   console.log("Original object 1: " + JSON.stringify(o1));
+  //   var o2 = {...o1, otherAtt: "changed"};
+  //   console.log("Cloned Object 2: " + JSON.stringify(o2));
+
+  //   console.log("============ Copy state ==============");
+  //   var o2 = {...this.state};
+  //   console.log("Cloned Object 2: " + JSON.stringify(o2));
+  // }
+
+  testRedux = () => {
+    var curState = {
+      test1: 1,
+      test2: "value2"
+    }
+    var redux = require('redux');
+    var producer1 = (state=curState, action) => {
+      switch (action.type) {
+        case "DO_NOTHING":
+          return {...state};
+        case "UPDATE_TEST1":
+          return {...state, test1: 10};
+          case "UPDATE_TEST2":
+          return {...state, test2: action.test2};
+      }
+    }
+    var store1 = redux.createStore(producer1);
+
+    store1.subscribe(() => {
+      console.log(store1.getState());
+    });
+
+    store1.dispatch({type: "DO_NOTHING"});
+    store1.dispatch({type: "UPDATE_TEST1"});
+    store1.dispatch({type: "UPDATE_TEST2", test2: "update tu ngoai"});
   }
 
   saveToLocalStorage = (basedData = this.state.data) => {
