@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import * as APP_CONST from '../common/AppConst';
+import {connect} from 'react-redux';
+import DataFilter from '../common/DataFilter';
 const uuidv1 = require('uuid/v1');
 
 class AddUser extends Component {
@@ -30,7 +33,7 @@ class AddUser extends Component {
             "quyen": this.state.quyen
         }
 
-        this.props.addNewUser(newUser);
+        this.props.addNewUser(newUser, this.props.data, this.props.resultFilter);
     }
 
     hienThiForm = () => {
@@ -78,4 +81,28 @@ class AddUser extends Component {
     }
 }
 
-export default AddUser;
+const mapStateToProps = (state) => {
+    return {
+        data: state.data,
+        tmpData: state.tmpData,
+        trangThaiSua: state.trangThaiSua,
+        resultFilter: state.resultFilter,
+        quyens: state.quyens
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addNewUser: (newUser, oldDatas, resultFilter) => {
+            var datas = [...oldDatas, newUser];
+            var newTmpData = DataFilter.getFilteredData(resultFilter, datas)
+            dispatch({
+                type: APP_CONST.STORE_ADD_USER,
+                data: datas,
+                tmpData: newTmpData
+            })
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddUser)

@@ -1,11 +1,13 @@
 import * as APP_CONST from '../common/AppConst'
+import quyens from '../datas/quyens.json';
 var redux = require('redux');
 
 var appState = {
     trangThaiSua: false,
     data: [],
     tmpData:[],
-    resultFilter: ''
+    resultFilter: '',
+    quyens: quyens
 }
 
 var appProducer = (state=appState, action) => {
@@ -21,7 +23,10 @@ var appProducer = (state=appState, action) => {
         
         case APP_CONST.STORE_UPDATE_SEARCH_FILTER:
             return {...state, tmpData: action.tmpData, resultFilter: action.resultFilter}
-        
+
+        case APP_CONST.STORE_ADD_USER:
+            return {...state, data: action.data, tmpData: action.tmpData}
+            
         default:
             return {...state}
     }

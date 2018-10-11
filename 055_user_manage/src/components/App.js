@@ -5,8 +5,7 @@ import Search from './Search';
 import Tabledata from './Tabledata';
 import AddUser from './AddUser';
 import ButtonsSwap from './ButtonsSwap';
-import fileDuLieu from './data.json';
-import quyens from './quyens.json';
+import fileDuLieu from '../datas/data.json';
 import {connect} from 'react-redux';
 import * as APP_CONST from '../common/AppConst'
 import DataFilter from '../common/DataFilter'
@@ -26,14 +25,6 @@ class App extends Component {
       var storedData = JSON.parse(localData);
       this.props.syncLocalStorage(storedData);
     }
-  }
-
-  addNewUser = (newUser) => {
-    this.state.data.push(newUser);
-    this.setState({
-      tmpData: DataFilter.getFilteredData(this.props.resultFilter, this.props.data)
-    });
-    this.saveToLocalStorage();
   }
 
   onBtnEditClick = (user) => {
@@ -69,15 +60,12 @@ class App extends Component {
             <div className="row">
               <Search />
               <Tabledata 
-                  data = {this.props.tmpData} quyens={quyens} 
+                  data = {this.props.tmpData} quyens={this.props.quyens} 
                   onBtnEditClick = {this.onBtnEditClick} 
                   onBtnDeleteClick = {this.onBtnDeleteClick}/>
               <div className="col-3">
                 <ButtonsSwap />
-                <AddUser 
-                    trangThaiSua={this.props.trangThaiSua} 
-                    quyens={quyens} 
-                    addNewUser={this.addNewUser} />
+                <AddUser />
               </div>
             </div>
           </div>
