@@ -24,13 +24,13 @@ class ButtonsSwap extends Component {
     }
 }
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
     return {
         trangThaiSua: state.trangThaiSua
     }
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => {
+const mapDispatchToProps = (dispatch) => {
     return {
         swapStatus: (curStatus) => {
             dispatch({

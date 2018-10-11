@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import * as APP_CONST from '../common/AppConst'
+import { connect } from 'react-redux';
+import DataFilter from '../common/DataFilter';
 
 class Search extends Component {
     constructor(props) {
@@ -22,7 +25,9 @@ class Search extends Component {
                         <input className="form-control" type="text" placeholder="Tìm kiếm"
                             onChange={(event) => this.onTimKiem(event)} />
                         <div className="btn btn-info" 
-                            onClick={() => this.props.returnGiaTriTim(this.state.giaTriTimKiem)}>Tìm</div>
+                            onClick={() => this.props.returnGiaTriTim(
+                                this.state.giaTriTimKiem, 
+                                this.props.data)}>Tìm</div>
                     </div>
                 </div>
                 <hr />
@@ -31,4 +36,25 @@ class Search extends Component {
     }
 }
 
-export default Search;
+const mapStateToProps = (state) => {
+    return {
+        data: state.data,
+        tmpData: state.tmpData,
+        resultFilter: state.resultFilter
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        returnGiaTriTim: (filteredValue, data) => {
+            var filteredData = DataFilter.getFilteredData(filteredValue, data);
+            dispatch({
+                type: APP_CONST.STORE_UPDATE_SEARCH_FILTER,
+                tmpData: filteredData,
+                resultFilter: filteredValue
+            })
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Search)

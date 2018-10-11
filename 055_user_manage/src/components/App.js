@@ -9,6 +9,7 @@ import fileDuLieu from './data.json';
 import quyens from './quyens.json';
 import {connect} from 'react-redux';
 import * as APP_CONST from '../common/AppConst'
+import DataFilter from '../common/DataFilter'
 
 class App extends Component {
 
@@ -27,28 +28,10 @@ class App extends Component {
     }
   }
 
-  getFilteredData = (filterValue, basedData = this.state.data) => {
-    var filteredArr = [];
-    basedData.forEach(element => {
-      if (element.hoTen.indexOf(filterValue) !== -1) {
-        filteredArr.push(element);
-      }
-    });
-
-    return filteredArr;
-  }
-
-  filterTableData = (giaTriCanTim) => {
-    this.setState({
-      tmpData: this.getFilteredData(giaTriCanTim),
-      resultFilter: giaTriCanTim
-    });
-  }
-
   addNewUser = (newUser) => {
     this.state.data.push(newUser);
     this.setState({
-      tmpData: this.getFilteredData(this.state.resultFilter)
+      tmpData: DataFilter.getFilteredData(this.props.resultFilter, this.props.data)
     });
     this.saveToLocalStorage();
   }
@@ -61,18 +44,18 @@ class App extends Component {
       }
     });
     this.setState({
-      tmpData: this.getFilteredData(this.state.resultFilter)
+      tmpData: this.getFilteredData(this.props.resultFilter)
     });
     this.saveToLocalStorage();
   }
 
   onBtnDeleteClick = (userId) => {
-    var userData =  this.state.data.filter(item => item.id !== userId);
+    var userData =  this.props.data.filter(item => item.id !== userId);
     this.setState({
       data: userData,
     });
     this.setState({
-      tmpData: this.getFilteredData(this.state.resultFilter, userData)
+      tmpData: this.getFilteredData(this.props.resultFilter, userData)
     });
     this.saveToLocalStorage(userData);
   }
@@ -84,7 +67,7 @@ class App extends Component {
         <div className="searchForm">
           <div className="container">
             <div className="row">
-              <Search returnGiaTriTim={this.filterTableData} />
+              <Search />
               <Tabledata 
                   data = {this.props.tmpData} quyens={quyens} 
                   onBtnEditClick = {this.onBtnEditClick} 
@@ -104,11 +87,11 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
   return {...state};
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => {
+const mapDispatchToProps = (dispatch) => {
   return {
     syncLocalStorage: (storedData) => {
       dispatch({

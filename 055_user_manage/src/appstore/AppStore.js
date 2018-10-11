@@ -18,6 +18,12 @@ var appProducer = (state=appState, action) => {
 
         case APP_CONST.STORE_UPDATE_EDIT_STATE:
             return {...state, trangThaiSua: action.trangThaiSua}
+        
+        case APP_CONST.STORE_UPDATE_SEARCH_FILTER:
+            return {...state, tmpData: action.tmpData, resultFilter: action.resultFilter}
+        
+        default:
+            return {...state}
     }
 }
 var AppStore = redux.createStore(appProducer);
