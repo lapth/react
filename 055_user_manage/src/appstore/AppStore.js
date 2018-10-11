@@ -25,8 +25,10 @@ var appProducer = (state=appState, action) => {
             return {...state, tmpData: action.tmpData, resultFilter: action.resultFilter}
 
         case APP_CONST.STORE_ADD_USER:
+        case APP_CONST.STORE_EDIT_USER:
+        case APP_CONST.STORE_DELETE_USER:
             return {...state, data: action.data, tmpData: action.tmpData}
-            
+
         default:
             return {...state}
     }
@@ -34,7 +36,7 @@ var appProducer = (state=appState, action) => {
 var AppStore = redux.createStore(appProducer);
 
 AppStore.subscribe(() => {
-    console.log(AppStore.getState());
+    // console.log(AppStore.getState());
 });
 
 AppStore.dispatch({type: "DO_NOTHING"});

@@ -27,30 +27,6 @@ class App extends Component {
     }
   }
 
-  onBtnEditClick = (user) => {
-    this.state.data.some((item, index, arr) => {
-      if (item.id === user.id) {
-        arr[index] = JSON.parse(JSON.stringify(user));
-        return true;
-      }
-    });
-    this.setState({
-      tmpData: this.getFilteredData(this.props.resultFilter)
-    });
-    this.saveToLocalStorage();
-  }
-
-  onBtnDeleteClick = (userId) => {
-    var userData =  this.props.data.filter(item => item.id !== userId);
-    this.setState({
-      data: userData,
-    });
-    this.setState({
-      tmpData: this.getFilteredData(this.props.resultFilter, userData)
-    });
-    this.saveToLocalStorage(userData);
-  }
-
   render() {
     return (
       <div>
@@ -59,10 +35,7 @@ class App extends Component {
           <div className="container">
             <div className="row">
               <Search />
-              <Tabledata 
-                  data = {this.props.tmpData} quyens={this.props.quyens} 
-                  onBtnEditClick = {this.onBtnEditClick} 
-                  onBtnDeleteClick = {this.onBtnDeleteClick}/>
+              <Tabledata data = {this.props.tmpData} quyens={this.props.quyens} />
               <div className="col-3">
                 <ButtonsSwap />
                 <AddUser />

@@ -23,9 +23,7 @@ class Tabledata extends Component {
                                             rowData={value} 
                                             stt={key} 
                                             key={key} 
-                                            quyens={this.props.quyens}
-                                            onBtnEditClick = {this.props.onBtnEditClick}
-                                            onBtnDeleteClick = {this.props.onBtnDeleteClick}/>
+                                            />
                             })
                         }
                     </tbody>

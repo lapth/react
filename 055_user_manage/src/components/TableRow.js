@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import * as APP_CONST from '../common/AppConst';
+import {connect} from 'react-redux';
+import DataFilter from '../common/DataFilter';
 
 class TableRow extends Component {
     constructor(props) {
@@ -33,7 +36,11 @@ class TableRow extends Component {
         modifiedUser.tel = this.state.tel;
         modifiedUser.quyen = this.state.quyen;
 
-        this.props.onBtnEditClick(modifiedUser);
+        this.props.onEditDone(this.props.data, modifiedUser, this.props.resultFilter);
+    }
+
+    onDelete = (userId) => {
+        this.props.onDelete(this.props.data, userId, this.props.resultFilter);
     }
 
     render() {
@@ -47,7 +54,7 @@ class TableRow extends Component {
                     <td>
                         <div className="btn-group">
                             <div className="btn btn-warning" onClick={() => this.swapFormMode()}><i className="fa fa-edit" /> Sửa</div>
-                            <div className="btn btn-danger" onClick={() => this.props.onBtnDeleteClick(this.props.rowData.id)}>
+                            <div className="btn btn-danger" onClick={() => this.onDelete(this.props.rowData.id)}>
                                 <i className="fa fa-trash" /> Xóa</div>
                         </div>
                     </td>
@@ -95,4 +102,42 @@ class TableRow extends Component {
     }
 }
 
-export default TableRow;
+const mapStateToProps = (state) => {
+    return {
+        tmpData: state.tmpData,
+        data: state.data,
+        resultFilter: state.resultFilter,
+        quyens: state.quyens
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onEditDone: (curData, modifiedUser, resultFilter) => {
+            curData.some((item, index, arr) => {
+                if (item.id === modifiedUser.id) {
+                  arr[index] = JSON.parse(JSON.stringify(modifiedUser));
+                  return true;
+                }
+            });
+            var newTmpData = DataFilter.getFilteredData(resultFilter, curData);
+            dispatch({
+                type: APP_CONST.STORE_EDIT_USER,
+                data: curData,
+                tmpData: newTmpData
+            })
+        },
+
+        onDelete: (curData, userId, resultFilter) => {
+            var userData =  curData.filter(item => item.id !== userId);
+            var newTmpData = DataFilter.getFilteredData(resultFilter, userData);
+            dispatch({
+                type: APP_CONST.STORE_DELETE_USER,
+                data: userData,
+                tmpData: newTmpData
+            })
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TableRow)
