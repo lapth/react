@@ -32,8 +32,8 @@
 104 - Redux switch action type
 105 - dispatch subscribe
 106 - Redux snippet
-107 - Export store
-108 - react-redux-connect stor
+107 - Export store. tai sao phai su dung 1 dispatch khi export truoc khi dung trong App ?
+108 - react-redux-connect store
 109 - combine producer
 110 - Trigger an action inside of store
 111 - Trigger an action inside of store 1
@@ -61,11 +61,11 @@
 134 - Nhan item can sua
 135 - Day du lieu len form
 136 - Load item ve (co id)
-137
-138
-139
-140
-141
+137 - Luu du lieu
+138 - Day du lieu len store
+139 - getChild firebase, update
+140 - 
+141 - 
 142
 143
 144

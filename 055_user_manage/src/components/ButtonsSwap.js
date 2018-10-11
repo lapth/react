@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
+import * as APP_CONST from '../common/AppConst'
 
 class ButtonsSwap extends Component {
     hienThiSua = () => {
         if (this.props.trangThaiSua === true) {
             return <div className="btn btn-outline-primary btn-block" 
-                onClick={() => this.props.thayDoiTrangThai()}>Thêm Mới</div>
+                onClick={() => this.props.swapStatus(this.props.trangThaiSua)}>Thêm Mới</div>
         } else {
             return <div className="btn btn-outline-secondary btn-block" 
-                onClick={() => this.props.thayDoiTrangThai()}>Ẩn</div>
+                onClick={() => this.props.swapStatus(this.props.trangThaiSua)}>Ẩn</div>
         }
     }
 
@@ -22,4 +24,20 @@ class ButtonsSwap extends Component {
     }
 }
 
-export default ButtonsSwap;
+const mapStateToProps = (state, ownProps) => {
+    return {
+        trangThaiSua: state.trangThaiSua
+    }
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        swapStatus: (curStatus) => {
+            dispatch({
+                type: APP_CONST.STORE_UPDATE_EDIT_STATE,
+                trangThaiSua: !curStatus
+            })
+        }
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(ButtonsSwap)
