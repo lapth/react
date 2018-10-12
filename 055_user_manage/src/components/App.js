@@ -5,30 +5,22 @@ import Search from './Search';
 import Tabledata from './Tabledata';
 import AddUser from './AddUser';
 import ButtonsSwap from './ButtonsSwap';
-import fileDuLieu from '../datas/data.json';
 import {connect} from 'react-redux';
 import * as APP_CONST from '../common/AppConst'
 import dataPersistence from '../persistence/DataPersistence';
+import DataFilter from '../common/DataFilter';
 
 class App extends Component {
 
-  saveToLocalStorage = (basedData = this.state.data) => {
-    localStorage.setItem('UserData', JSON.stringify(basedData));
-  }
-
   componentWillMount() {
-    var localData = localStorage.getItem('UserData');
-    if (localData === null) {
-      this.saveToLocalStorage(fileDuLieu);
-      this.props.syncLocalStorage(fileDuLieu);
-    } else {
-      var storedData = JSON.parse(localData);
-      this.props.syncLocalStorage(storedData);
-    }
+    dataPersistence.registerDataChange((appData) => {
+      this.props.syncFirebaseStorage(
+        appData,
+        this.props.resultFilter)
+    })
   }
 
   render() {
-    dataPersistence.getAllData();
     return (
       <div>
         <Header />
@@ -55,11 +47,12 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    syncLocalStorage: (storedData) => {
+    syncFirebaseStorage: (storedData, resultFilter) => {
+      var newTmpData = DataFilter.getFilteredData(resultFilter, storedData)
       dispatch({
         type: APP_CONST.STORE_SYNC_LOCAL_STORAGE,
         data: storedData,
-        tmpData: storedData
+        tmpData: newTmpData
       })
     }
   }

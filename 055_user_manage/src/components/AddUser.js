@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
-import * as APP_CONST from '../common/AppConst';
 import {connect} from 'react-redux';
-import DataFilter from '../common/DataFilter';
-const uuidv1 = require('uuid/v1');
+import dataPersistence from '../persistence/DataPersistence';
 
 class AddUser extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            id: "",
             hoTen: "",
             tel: "",
             quyen: ""
@@ -27,13 +24,12 @@ class AddUser extends Component {
 
     onBtnAddUserClick = () => {
         var newUser = {
-            "id": uuidv1(),
             "hoTen": this.state.hoTen,
             "tel": this.state.tel,
             "quyen": this.state.quyen
         }
 
-        this.props.addNewUser(newUser, this.props.data, this.props.resultFilter);
+        dataPersistence.addUser(newUser);
     }
 
     hienThiForm = () => {
@@ -93,15 +89,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addNewUser: (newUser, oldDatas, resultFilter) => {
-            var datas = [...oldDatas, newUser];
-            var newTmpData = DataFilter.getFilteredData(resultFilter, datas)
-            dispatch({
-                type: APP_CONST.STORE_ADD_USER,
-                data: datas,
-                tmpData: newTmpData
-            })
-        }
     }
 }
 

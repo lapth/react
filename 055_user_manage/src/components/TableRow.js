@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import * as APP_CONST from '../common/AppConst';
 import {connect} from 'react-redux';
-import DataFilter from '../common/DataFilter';
+import dataPersistence from '../persistence/DataPersistence';
 
 class TableRow extends Component {
     constructor(props) {
@@ -35,12 +34,12 @@ class TableRow extends Component {
         modifiedUser.hoTen = this.state.hoTen;
         modifiedUser.tel = this.state.tel;
         modifiedUser.quyen = this.state.quyen;
-
-        this.props.onEditDone(this.props.data, modifiedUser, this.props.resultFilter);
+        
+        dataPersistence.updateUser(modifiedUser);
     }
 
     onDelete = (userId) => {
-        this.props.onDelete(this.props.data, userId, this.props.resultFilter);
+        dataPersistence.deleteUser(userId);
     }
 
     render() {
@@ -54,7 +53,7 @@ class TableRow extends Component {
                     <td>
                         <div className="btn-group">
                             <div className="btn btn-warning" onClick={() => this.swapFormMode()}><i className="fa fa-edit" /> Sửa</div>
-                            <div className="btn btn-danger" onClick={() => this.onDelete(this.props.rowData.id)}>
+                            <div className="btn btn-danger" onClick={() => this.onDelete(this.props.rowData.key)}>
                                 <i className="fa fa-trash" /> Xóa</div>
                         </div>
                     </td>
@@ -113,30 +112,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onEditDone: (curData, modifiedUser, resultFilter) => {
-            curData.some((item, index, arr) => {
-                if (item.id === modifiedUser.id) {
-                  arr[index] = JSON.parse(JSON.stringify(modifiedUser));
-                  return true;
-                }
-            });
-            var newTmpData = DataFilter.getFilteredData(resultFilter, curData);
-            dispatch({
-                type: APP_CONST.STORE_EDIT_USER,
-                data: curData,
-                tmpData: newTmpData
-            })
-        },
-
-        onDelete: (curData, userId, resultFilter) => {
-            var userData =  curData.filter(item => item.id !== userId);
-            var newTmpData = DataFilter.getFilteredData(resultFilter, userData);
-            dispatch({
-                type: APP_CONST.STORE_DELETE_USER,
-                data: userData,
-                tmpData: newTmpData
-            })
-        }
     }
 }
 
