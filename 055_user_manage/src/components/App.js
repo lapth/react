@@ -8,7 +8,7 @@ import ButtonsSwap from './ButtonsSwap';
 import fileDuLieu from '../datas/data.json';
 import {connect} from 'react-redux';
 import * as APP_CONST from '../common/AppConst'
-import DataFilter from '../common/DataFilter'
+import dataPersistence from '../persistence/DataPersistence';
 
 class App extends Component {
 
@@ -28,6 +28,7 @@ class App extends Component {
   }
 
   render() {
+    dataPersistence.getAllData();
     return (
       <div>
         <Header />
