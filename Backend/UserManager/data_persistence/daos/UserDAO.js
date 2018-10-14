@@ -79,5 +79,4 @@ class UserDAO {
 // userDao.updateUser(user, (users) => {
 //     console.log("User: " + users);
 // });
-
-exports.userDao = new UserDAO();
+module.exports = UserDAO;
