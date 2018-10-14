@@ -8,6 +8,17 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
+var mongoose = require('mongoose');
+mongoose.connect("mongodb://admin:Admin12345@ds123259.mlab.com:23259/react-learning");
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+  console.log("DB Connected!");
+
+  var userDao = require('./data_persistence/daos/UserDAO');
+});
+
+//
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
