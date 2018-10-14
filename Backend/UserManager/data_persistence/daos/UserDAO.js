@@ -37,6 +37,16 @@ class UserDAO {
         });
     }
 
+    removeUser(userId, callBack) {
+        UserModel.findByIdAndRemove(userId, (err, result) => {
+            if (err) {
+                return console.error(err);
+            }
+            console.debug("User has been removed");
+            callBack(result);
+        })
+    }
+
     getUser(userId, callBack) {
         UserModel.find({_id: userId}, (err, users) => {
             if (err) {
